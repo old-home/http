@@ -1,0 +1,62 @@
+{
+    "name": "graywings/http",
+    "description": "A simple HTTP protocol library for PHP.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Taira Terashima",
+            "email": "taira.terashima@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "platform": {
+            "php": "8.2",
+            "ext-ctype": "8.2",
+            "ext-iconv": "8.2",
+            "ext-json": "8.2",
+            "ext-mbstring": "8.2",
+            "ext-simplexml": "8.2",
+            "ext-xml": "8.2"
+        }
+    },
+    "require": {
+        "psr/http-message": "^2.0"
+    },
+    "require-dev": {
+        "vimeo/psalm": "^5.15",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Graywings\\Http\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Graywings\\Http\\Tests\\Units\\": "tests/units",
+            "Graywings\\Http\\Tests\\Features\\": "tests/features"
+        }
+    },
+    "scripts": {
+        "build": [
+            "@lint",
+            "@test"
+        ],
+        "test": [
+            "@test:units",
+            "@test:features"
+        ],
+        "test:units": "phpunit --testsuite units --display-warnings",
+        "test:features": "phpunit --testsuite features",
+        "test:coverage": "phpunit --testsuite units --coverage-html=build/coverage",
+        "lint": [
+            "@lint:phpstan",
+            "@lint:psalm"
+        ],
+        "lint:phpstan": "phpstan",
+        "lint:psalm": "psalm"
+    }
+}
