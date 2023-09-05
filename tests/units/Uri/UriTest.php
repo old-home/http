@@ -79,6 +79,22 @@ class UriTest extends TestCase
         $this->assertSame('https://example.co.jp/', $uri->__toString());
     }
 
+    public function testParseOnlyPath(): void
+    {
+        $uri = Uri::parse('/foo/bar');
+
+        $this->assertInstanceOf(Uri::class, $uri);
+        $this->assertSame('', $uri->getScheme());
+        $this->assertSame('', $uri->getUserInfo());
+        $this->assertSame('', $uri->getHost());
+        $this->assertSame(null, $uri->getPort());
+        $this->assertSame('', $uri->getAuthority());
+        $this->assertSame('/foo/bar', $uri->getPath());
+        $this->assertSame('', $uri->getQuery());
+        $this->assertSame('', $uri->getFragment());
+        $this->assertSame(':///foo/bar', $uri->__toString());
+    }
+
     public function testGetAuthority(): void
     {
         $uri = new Uri(
